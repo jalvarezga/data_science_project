@@ -1,0 +1,28 @@
+{% if success %}
+<div
+  id="histogram-section"
+  class="content-section {% if not histogram_img %}hidden{% endif %}"
+>
+  <h2>Select Variable for Histogram:</h2>
+  <form action="/show_histogram" method="POST">
+    <select name="column_name">
+      {% for column in column_names %}
+      <option value="{{ column }}">{{ column }}</option>
+      {% endfor %}
+    </select>
+    <label for="color">Color:</label>
+    <select name="color">
+      <option value="blue">Blue</option>
+      <option value="green">Green</option>
+      <option value="red">Red</option>
+      <option value="orange">Orange</option>
+    </select>
+    <input type="hidden" name="file_path" value="{{ filename }}" />
+    <button type="submit">Show Histogram</button>
+  </form>
+  {% if histogram_img %}
+  <h2>Histogram:</h2>
+  <img src="data:image/png;base64,{{ histogram_img }}" alt="Histogram" />
+  {% endif %}
+</div>
+{% endif %}

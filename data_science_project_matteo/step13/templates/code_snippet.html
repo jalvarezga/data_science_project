@@ -1,0 +1,31 @@
+<button id="toggle-code-button" onclick="toggleCodeSnippet()">
+  Show Python Code Snippet
+</button>
+<div id="code-snippet-container" style="display: none">
+  <h2>Python Code Snippet:</h2>
+  <pre id="code-snippet">
+    {% if success %}
+      Click on a function button above to see the corresponding Python code.
+    {% else %}
+      Select and upload a CSV file to see relevant code snippets.
+    {% endif %}
+  </pre>
+</div>
+
+<pre id="upload-code" style="display: none">
+    import pandas as pd
+    df = pd.read_csv('{{ filename if filename else "your_file.csv" }}')
+</pre>
+<pre id="show-table-code" style="display: none">
+    print(df.head())
+</pre>
+<pre id="histogram-code" style="display: none">
+    import pandas as pd
+    import matplotlib.pyplot as plt
+    df = pd.read_csv("{{ filename }}")
+    df["{% if column_name %}{{ column_name }}{% else %}your_column{% endif %}"].dropna().hist(bins=20, color="{% if color %}{{ color }}{% else %}blue{% endif %}", edgecolor='black')
+    plt.title("Histogram of {% if column_name %}{{ column_name }}{% else %}your_column{% endif %}")
+    plt.xlabel("{{ column_name }}")
+    plt.ylabel('Frequency')
+    plt.show()
+</pre>

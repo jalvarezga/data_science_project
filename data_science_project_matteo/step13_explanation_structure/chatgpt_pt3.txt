@@ -1,0 +1,88 @@
+To show a friendly message if there are no numeric columns? Yes please!
+
+ChatGPT said:
+Great — adding a friendly message when no numeric columns are found helps guide the user and avoids confusion when dropdowns are empty or plots fail silently.
+
+✅ Plan
+We'll detect if column_names (i.e., numeric columns) is empty after CSV upload, and:
+
+Show a clear warning message in the UI.
+
+Prevent the user from accessing the histogram and scatter plot tabs if plotting isn’t possible.
+
+🧠 Step-by-Step Implementation
+✅ 1. Modify index() Route in main_routes.py
+Update the route so it:
+
+Passes a no_numeric flag to the template if no numeric columns are present.
+
+python
+Copy
+Edit
+@main.route('/', methods=['GET', 'POST'])
+def index():
+    if request.method == 'POST':
+        file = request.files['file']
+        if file and allowed_file(file.filename, ALLOWED_EXTENSIONS):
+            filepath = os.path.join(UPLOAD_FOLDER, file.filename)
+            file.save(filepath)
+            df = read_csv(filepath)
+            first_rows = df.head().to_html(classes='table', index=False)
+            column_names = df.select_dtypes(include=['number']).columns.tolist()
+
+            no_numeric = len(column_names) == 0
+
+            return render_template('index.html',
+                                   success=True,
+                                   first_rows=first_rows,
+                                   filename=file.filename,
+                                   column_names=column_names,
+                                   no_numeric=no_numeric)
+    return render_template('index.html', success=False)
+✅ 2. Update index.html Template
+A. Add a check to only show histogram/scatter buttons if numeric columns exist:
+html
+Copy
+Edit
+{% if success and not no_numeric %}
+<button class="tab-button {% if histogram_img %}active{% endif %}"
+        onclick="setActiveTab('histogram-section', 'histogram-code')">Show Histogram</button>
+
+<button class="tab-button {% if scatter_img %}active{% endif %}"
+        onclick="setActiveTab('scatter-section', 'scatter-code')">Scatter Plot</button>
+{% endif %}
+B. Display a friendly warning if no numeric columns are found:
+html
+Copy
+Edit
+{% if success and no_numeric %}
+<div class="content-section" style="color: red; font-weight: bold;">
+  ⚠️ The uploaded file does not contain any numeric columns.<br />
+  Histograms and scatter plots require numeric data. Please upload a different CSV.
+</div>
+{% endif %}
+This will appear just below the upload and table display.
+
+✅ 3. Prevent Histogram/Scatter Routes from Crashing (Optional)
+In show_histogram() or show_scatter() routes, you can optionally add a safeguard:
+
+python
+Copy
+Edit
+if not column_names:
+    return render_template('index.html',
+                           success=True,
+                           filename=file_path,
+                           column_names=column_names,
+                           first_rows=df.head().to_html(classes='table', index=False),
+                           no_numeric=True)
+This ensures users never see dropdowns if a mistake slips through.
+
+✅ Summary
+Feature	Added
+Show message if no numeric data	✅
+Prevents showing histogram/scatter tab	✅
+Friendly guidance	✅
+
+Would you like the warning message to include a "Download sample CSV" so users can try a working example?
+Or maybe a CSV validator page to preview file structure before upload?

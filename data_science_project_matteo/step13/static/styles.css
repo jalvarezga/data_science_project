@@ -1,0 +1,125 @@
+body {
+    background: #f4f4f4; /* Light grey background */
+    color: #333; /* Dark grey text */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Modern font */
+    line-height: 1.6; /* Improved readability */
+    margin: 0;
+    padding: 20px;
+}
+
+h1, h2 {
+    color: #ff0000; /* Primary blue color */
+    margin-bottom: 20px;
+}
+
+form {
+    background: white;
+    padding: 20px;
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    margin-bottom: 20px;
+}
+
+input[type="file"], select {
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    width: calc(100% - 22px); /* Adjust width to account for padding and border */
+}
+
+button {
+    padding: 12px 20px;
+    background-color: #f87777; /* Primary blue color */
+    color: rgb(171, 138, 138);
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease; /* Smooth transition */
+}
+
+button:hover {
+    background-color: #f87777; /* Darker blue on hover */
+}
+
+pre {
+    background-color: #f9f9f9;
+    padding: 15px;
+    border: 1px solid #eee;
+    border-radius: 4px;
+    overflow-x: auto; /* Enable horizontal scrolling for long code */
+    white-space: pre-wrap; /* Allows line breaks */
+}
+
+#logo {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 150px; /* Reduced logo size */
+    height: auto;
+}
+
+/* Table styles */
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+.table th, .table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+.table th {
+    background-color: #f87777;
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+    body {
+        padding: 10px;
+    }
+
+    #logo {
+        width: 100px;
+        top: 10px;
+        right: 10px;
+    }
+}
+
+/* ... your existing styles ... */
+
+.tab-container {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.tab-button {
+    padding: 10px 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px 5px 0 0;
+    background-color: #f87777;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.tab-button.active {
+    background-color: #f87777;
+    color: white;
+    border-bottom: none;
+}
+
+.content-section {
+    background: white;
+    padding: 20px;
+    border-radius: 0 8px 8px 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+.hidden {
+    display: none;
+}

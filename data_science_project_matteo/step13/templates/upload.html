@@ -1,0 +1,10 @@
+<div
+  id="upload-section"
+  class="content-section {% if success or histogram_img %}hidden{% endif %}"
+>
+  <h2>Upload a CSV File</h2>
+  <form action="/" method="POST" enctype="multipart/form-data">
+    <input type="file" name="file" accept=".csv" />
+    <button type="submit">Upload</button>
+  </form>
+</div>
