@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, request
-from utils.helpers import allowed_file, read_csv, plot_histogram
+from utils.helpers import allowed_file, read_csv, plot_histogram, plot_scatter
 import os
 from config import UPLOAD_FOLDER, ALLOWED_EXTENSIONS
 
