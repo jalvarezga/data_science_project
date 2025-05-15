@@ -20,10 +20,6 @@ def index():
     return render_template('index.html', success=False)
 
 @main.route('/show_histogram', methods=['POST'])
-
-
-
-@main.route('/show_histogram', methods=['POST'])
 def show_histogram():
     file_path = request.form['file_path']
     column_name = request.form['column_name']

@@ -4,9 +4,6 @@ ChatGPT said:
 Great! Let's walk through your modular Flask project structure and then show exactly how to add a new feature like a "Scatter Plot" button with all the pieces: templates, routing, utility functions, and Python code snippets.
 
 📁 Current Project Folder Structure (Explained in Detail)
-graphql
-Copy
-Edit
 project/
 │
 ├── app.py                   # 🔁 Main application entry point (starts the app)
