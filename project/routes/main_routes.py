@@ -45,7 +45,7 @@ def show_histogram():
                            filename=file_path,
                            column_names=column_names,
                            histogram_img=img_str,
-                           first_rows=first_rows,
+                           first_rows=first_rows,#note that we need to return the show first rows of the table here too. otherwise when we plot a histogram the table will not be rendered in the website
                            column_name=column_name,
                            color=color,
                            no_numeric=no_numeric)
