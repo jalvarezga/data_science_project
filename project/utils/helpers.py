@@ -18,7 +18,6 @@ def plot_histogram(df, column_name, color):
     ax.set_title(f"Histogram of {column_name}")
     ax.set_xlabel(column_name)
     ax.set_ylabel('Frequency')
-
     buf = io.BytesIO()
     FigureCanvas(fig).print_png(buf)
     buf.seek(0)
