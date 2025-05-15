@@ -2,6 +2,7 @@ import os
 import pandas as pd
 import base64
 import io
+from matplotlib.figure import Figure
 import matplotlib.pyplot as plt
 from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
 
@@ -22,3 +23,17 @@ def plot_histogram(df, column_name, color):
     FigureCanvas(fig).print_png(buf)
     buf.seek(0)
     return base64.b64encode(buf.getvalue()).decode('utf-8')
+
+
+def plot_scatter(df, x_column, y_column, color):
+    fig = Figure()
+    ax = fig.add_subplot(1, 1, 1)
+    ax.scatter(df[x_column], df[y_column], color=color)
+    ax.set_title(f"Scatter Plot of {x_column} vs {y_column}")
+    ax.set_xlabel(x_column)
+    ax.set_ylabel(y_column)
+
+    buf = io.BytesIO()
+    FigureCanvas(fig).print_png(buf)
+    buf.seek(0)
+    return base64.b64encode(buf.getvalue()).decode("utf-8")

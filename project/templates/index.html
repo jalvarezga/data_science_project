@@ -42,12 +42,21 @@
       >
         Show Histogram
       </button>
+      {% endif %} {% if success and not no_numeric %}
+      <!-- Existing buttons -->
+      <button
+        class="tab-button {% if scatter_img %}active{% endif %}"
+        onclick="setActiveTab('scatter-section', 'scatter-code')"
+      >
+        Scatter Plot
+      </button>
       {% endif %}
     </div>
 
     <!-- Include Partials -->
     {% include "upload.html" %} {% include "show_rows.html" %} {% include
-    "histogram.html" %} {% include "code_snippet.html" %}
+    "histogram.html" %} {% include "code_snippet.html" %}{% include
+    'scatter.html' %}
 
     <!-- JavaScript -->
     <script>

@@ -1,0 +1,37 @@
+<div
+  id="scatter-section"
+  class="content-section {% if not scatter_img %}hidden{% endif %}"
+>
+  <h2>Select Variables for Scatter Plot:</h2>
+  <form action="/show_scatter" method="POST">
+    <label for="x_column">X-axis:</label>
+    <select name="x_column" required>
+      {% for column in column_names %}
+      <option value="{{ column }}">{{ column }}</option>
+      {% endfor %}
+    </select>
+
+    <label for="y_column">Y-axis:</label>
+    <select name="y_column" required>
+      {% for column in column_names %}
+      <option value="{{ column }}">{{ column }}</option>
+      {% endfor %}
+    </select>
+
+    <label for="color">Color:</label>
+    <select name="color">
+      <option value="blue">Blue</option>
+      <option value="green">Green</option>
+      <option value="red">Red</option>
+      <option value="orange">Orange</option>
+    </select>
+
+    <input type="hidden" name="file_path" value="{{ filename }}" />
+    <button type="submit">Show Scatter Plot</button>
+  </form>
+
+  {% if scatter_img %}
+  <h2>Scatter Plot:</h2>
+  <img src="data:image/png;base64,{{ scatter_img }}" alt="Scatter Plot" />
+  {% endif %}
+</div>

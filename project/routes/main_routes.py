@@ -50,3 +50,25 @@ def show_histogram():
                            color=color,
                            no_numeric=no_numeric)
 
+@main.route('/show_scatter', methods=['POST'])
+def show_scatter():
+    file_path = request.form['file_path']
+    x_column = request.form['x_column']
+    y_column = request.form['y_column']
+    color = request.form['color']
+
+    df = read_csv(os.path.join(UPLOAD_FOLDER, file_path))
+    column_names = df.select_dtypes(include=['number']).columns.tolist()
+    first_rows = df.head().to_html(classes='table', index=False)
+    scatter_img = plot_scatter(df, x_column, y_column, color)
+
+    return render_template('index.html',
+                           success=True,
+                           filename=file_path,
+                           column_names=column_names,
+                           first_rows=first_rows,
+                           scatter_img=scatter_img,
+                           x_column=x_column,
+                           y_column=y_column,
+                           color=color,
+                           no_numeric=(len(column_names) == 0))
