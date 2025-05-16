@@ -44,11 +44,9 @@ def compute_summary(df, col1, col2):
         summary[col] = {
             'mean': round(df[col].mean(), 3),
             'std': round(df[col].std(), 3),
-            "Min": df[col].min(),
             '25%': round(df[col].quantile(0.25), 3),
             '50%': round(df[col].median(), 3),
             '75%': round(df[col].quantile(0.75), 3),
-             "Max": df[col].max(),
             'missing': int(df[col].isnull().sum())
         }
     corr = round(df[[col1, col2]].corr().iloc[0, 1], 3)
