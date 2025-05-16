@@ -5,7 +5,6 @@ import io
 from matplotlib.figure import Figure
 import matplotlib.pyplot as plt
 from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
-from flask import session
 
 def allowed_file(filename, allowed_extensions):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in allowed_extensions
@@ -13,18 +12,6 @@ def allowed_file(filename, allowed_extensions):
 def read_csv(filepath):
     df = pd.read_csv(filepath)
     return df
-
-
-def store_df_in_session(df):
-    session['df'] = df.to_json()  # Save as JSON string
-
-def load_df_from_session():
-    if 'df' in session:
-        return pd.read_json(session['df'])
-    return None
-
-
-
 
 def plot_histogram(df, column_name, color):
     fig, ax = plt.subplots()
