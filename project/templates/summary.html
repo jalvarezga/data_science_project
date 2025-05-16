@@ -1,61 +1,23 @@
-{% if success %}
-<div
-  id="summary-section"
-  class="content-section {% if not summary_data %}hidden{% endif %}"
->
-  {% if no_numeric %}
-  <p style="color: red">
-    No numeric columns available for summary statistics. Please upload a
-    suitable CSV file.
-  </p>
-  {% else %}
-  <h2>Select Two Variables for Summary:</h2>
-  <form action="/show_summary" method="POST">
-    <label for="col1">Variable 1:</label>
-    <select name="col1" required>
-      {% for column in column_names %}
-      <option value="{{ column }}">{{ column }}</option>
-      {% endfor %}
-    </select>
+{% if summary_data %}
+<h2>Summary Statistics</h2>
+<table class="table">
+  <thead>
+    <tr>
+      <th>Statistic</th>
+      <th>{{ col1 }}</th>
+      <th>{{ col2 }}</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for stat in summary_data[col1].keys() %}
+    <tr>
+      <td>{{ stat }}</td>
+      <td>{{ summary_data[col1][stat] }}</td>
+      <td>{{ summary_data[col2][stat] }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
 
-    <label for="col2">Variable 2:</label>
-    <select name="col2" required>
-      {% for column in column_names %}
-      <option value="{{ column }}">{{ column }}</option>
-      {% endfor %}
-    </select>
-
-    <input type="hidden" name="file_path" value="{{ filename }}" />
-    <button type="submit">Generate Summary</button>
-  </form>
-
-  {% if summary_data %}
-  <h3>Summary for {{ col1 }}</h3>
-  <ul>
-    <li><strong>Mean:</strong> {{ summary_data[col1]['mean'] }}</li>
-    <li><strong>Std Dev:</strong> {{ summary_data[col1]['std'] }}</li>
-    <li><strong>25%:</strong> {{ summary_data[col1]['25%'] }}</li>
-    <li><strong>50%:</strong> {{ summary_data[col1]['50%'] }}</li>
-    <li><strong>75%:</strong> {{ summary_data[col1]['75%'] }}</li>
-    <li>
-      <strong>Missing Values:</strong> {{ summary_data[col1]['missing'] }}
-    </li>
-  </ul>
-
-  <h3>Summary for {{ col2 }}</h3>
-  <ul>
-    <li><strong>Mean:</strong> {{ summary_data[col2]['mean'] }}</li>
-    <li><strong>Std Dev:</strong> {{ summary_data[col2]['std'] }}</li>
-    <li><strong>25%:</strong> {{ summary_data[col2]['25%'] }}</li>
-    <li><strong>50%:</strong> {{ summary_data[col2]['50%'] }}</li>
-    <li><strong>75%:</strong> {{ summary_data[col2]['75%'] }}</li>
-    <li>
-      <strong>Missing Values:</strong> {{ summary_data[col2]['missing'] }}
-    </li>
-  </ul>
-
-  <h3>Correlation:</h3>
-  <p><strong>{{ col1 }} vs {{ col2 }}:</strong> {{ correlation }}</p>
-  {% endif %} {% endif %}
-</div>
+<h3>Correlation between {{ col1 }} and {{ col2 }}: {{ correlation }}</h3>
 {% endif %}
