@@ -5,13 +5,15 @@ import io
 from matplotlib.figure import Figure
 import matplotlib.pyplot as plt
 from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
-
+from flask import session
 def allowed_file(filename, allowed_extensions):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in allowed_extensions
+def get_current_df():
+    file_path = session.get('file_path')
+    if file_path and os.path.exists(file_path):
+        return read_csv(file_path)
+    return None
 
-def read_csv(filepath):
-    df = pd.read_csv(filepath)
-    return df
 
 def plot_histogram(df, column_name, color):
     fig, ax = plt.subplots()
