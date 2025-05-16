@@ -4,14 +4,14 @@
 >
   <h2>Select Variables for Scatter Plot:</h2>
   <form action="/show_scatter" method="POST">
-    <label for="x_column"> X-axis:</label>
+    <label for="x_column">X:</label>
     <select name="x_column" required>
       {% for column in column_names %}
       <option value="{{ column }}">{{ column }}</option>
       {% endfor %}
     </select>
 
-    <label for="y_column"> Y-axis:</label>
+    <label for="y_column"> Y:</label>
     <select name="y_column" required>
       {% for column in column_names %}
       <option value="{{ column }}">{{ column }}</option>
