@@ -50,13 +50,20 @@
       >
         Scatter Plot
       </button>
+      {% endif %} {% if success and not no_numeric %}
+      <button
+        class="tab-button {% if summary_data %}active{% endif %}"
+        onclick="setActiveTab('summary-section', 'summary-code')"
+      >
+        Summary
+      </button>
       {% endif %}
     </div>
 
     <!-- Include Partials -->
-    {% include "upload.html" %} {% include "show_rows.html" %} {% include
-    "histogram.html" %}{% include 'scatter.html' %} {% include
-    "code_snippet.html" %}
+    {% include "upload.html" %} {% include "show_rows.html" %}{% include
+    'partials/summary.html' %} {% include "histogram.html" %}{% include
+    'scatter.html' %} {% include "code_snippet.html" %}
 
     <!-- JavaScript -->
     <script>

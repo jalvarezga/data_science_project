@@ -40,3 +40,27 @@
   plt.ylabel("{{ y_column }}")
   plt.show()
 </pre>
+
+<pre id="summary-code" style="display: none">
+  import pandas as pd
+  df = pd.read_csv("{{ filename }}")
+  
+  # Summary for {{ col1 }}
+  mean_1 = df["{{ col1 }}"].mean()
+  std_1 = df["{{ col1 }}"].std()
+  q25_1 = df["{{ col1 }}"].quantile(0.25)
+  q50_1 = df["{{ col1 }}"].median()
+  q75_1 = df["{{ col1 }}"].quantile(0.75)
+  missing_1 = df["{{ col1 }}"].isnull().sum()
+
+  # Summary for {{ col2 }}
+  mean_2 = df["{{ col2 }}"].mean()
+  std_2 = df["{{ col2 }}"].std()
+  q25_2 = df["{{ col2 }}"].quantile(0.25)
+  q50_2 = df["{{ col2 }}"].median()
+  q75_2 = df["{{ col2 }}"].quantile(0.75)
+  missing_2 = df["{{ col2 }}"].isnull().sum()
+
+  # Correlation
+  correlation = df["{{ col1 }}"].corr(df["{{ col2 }}"])
+</pre>

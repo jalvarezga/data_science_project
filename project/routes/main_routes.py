@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, request
-from utils.helpers import allowed_file, read_csv, plot_histogram, plot_scatter
+from utils.helpers import allowed_file, read_csv, plot_histogram, plot_scatter, compute_summary
 import os
 from config import UPLOAD_FOLDER, ALLOWED_EXTENSIONS
 
@@ -89,4 +89,38 @@ def show_scatter():
                            x_column=x_column,
                            y_column=y_column,
                            color=color,
+                           no_numeric=False)
+
+@main.route('/show_summary', methods=['POST'])
+def show_summary():
+    file_path = request.form['file_path']
+    col1 = request.form['col1']
+    col2 = request.form['col2']
+
+    df = read_csv(os.path.join(UPLOAD_FOLDER, file_path))
+
+    column_names = df.select_dtypes(include=['number']).columns.tolist()
+    no_numeric = len(column_names) == 0
+    first_rows = df.head().to_html(classes='table', index=False)
+
+    if no_numeric:
+        return render_template('index.html',
+                               success=True,
+                               filename=file_path,
+                               column_names=[],
+                               first_rows=first_rows,
+                               no_numeric=True,
+                               summary_data=None)
+
+    summary_data, correlation = compute_summary(df, col1, col2)
+
+    return render_template('index.html',
+                           success=True,
+                           filename=file_path,
+                           column_names=column_names,
+                           first_rows=first_rows,
+                           summary_data=summary_data,
+                           correlation=correlation,
+                           col1=col1,
+                           col2=col2,
                            no_numeric=False)

@@ -37,3 +37,18 @@ def plot_scatter(df, x_column, y_column, color):
     FigureCanvas(fig).print_png(buf)
     buf.seek(0)
     return base64.b64encode(buf.getvalue()).decode("utf-8")
+
+def compute_summary(df, col1, col2):
+    summary = {}
+    for col in [col1, col2]:
+        summary[col] = {
+            'mean': round(df[col].mean(), 3),
+            'std': round(df[col].std(), 3),
+            '25%': round(df[col].quantile(0.25), 3),
+            '50%': round(df[col].median(), 3),
+            '75%': round(df[col].quantile(0.75), 3),
+            'missing': int(df[col].isnull().sum())
+        }
+    corr = round(df[[col1, col2]].corr().iloc[0, 1], 3)
+    return summary, corr
+
