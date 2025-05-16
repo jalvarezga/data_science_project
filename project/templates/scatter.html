@@ -1,17 +1,21 @@
+{% if success %}
 <div
   id="scatter-section"
   class="content-section {% if not scatter_img %}hidden{% endif %}"
 >
+  {% if no_numeric %}
+  <p style="color: red">No numeric columns available for scatter plot.</p>
+  {% else %}
   <h2>Select Variables for Scatter Plot:</h2>
   <form action="/show_scatter" method="POST">
-    <label for="x_column">X:</label>
+    <label for="x_column">X-axis:</label>
     <select name="x_column" required>
       {% for column in column_names %}
       <option value="{{ column }}">{{ column }}</option>
       {% endfor %}
     </select>
 
-    <label for="y_column"> Y:</label>
+    <label for="y_column">Y-axis:</label>
     <select name="y_column" required>
       {% for column in column_names %}
       <option value="{{ column }}">{{ column }}</option>
@@ -33,5 +37,6 @@
   {% if scatter_img %}
   <h2>Scatter Plot:</h2>
   <img src="data:image/png;base64,{{ scatter_img }}" alt="Scatter Plot" />
-  {% endif %}
+  {% endif %} {% endif %}
 </div>
+{% endif %}

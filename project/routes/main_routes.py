@@ -14,10 +14,12 @@ def index():
             file.save(filepath)
             df = read_csv(filepath)
             first_rows = df.head().to_html(classes='table', index=False)
-            column_names = df.columns.tolist()
+            column_names = df.select_dtypes(include=['number']).columns.tolist()
+            no_numeric = len(column_names) == 0
             return render_template('index.html', success=True, first_rows=first_rows,
-                                   filename=file.filename, column_names=column_names)
+                                   filename=file.filename, column_names=column_names, no_numeric=no_numeric)
     return render_template('index.html', success=False)
+
 
 @main.route('/show_histogram', methods=['POST'])
 def show_histogram():
@@ -58,7 +60,23 @@ def show_scatter():
     color = request.form['color']
 
     df = read_csv(os.path.join(UPLOAD_FOLDER, file_path))
+
+
+
+    ##Restrict to numeric columns only
     column_names = df.select_dtypes(include=['number']).columns.tolist()
+    no_numeric = len(column_names) == 0
+     ## If no numeric columns, skip plotting and show message
+    if no_numeric:
+        return render_template('index.html',
+                               success=True,
+                               filename=file_path,
+                               column_names=column_names,
+                               first_rows=df.head().to_html(classes='table', index=False),
+                               no_numeric=True,
+                               scatter_img=None)
+    
+    #Continue to plot if there are valid numeric columns
     first_rows = df.head().to_html(classes='table', index=False)
     scatter_img = plot_scatter(df, x_column, y_column, color)
 
@@ -71,4 +89,4 @@ def show_scatter():
                            x_column=x_column,
                            y_column=y_column,
                            color=color,
-                           no_numeric=(len(column_names) == 0))
+                           no_numeric=False)
