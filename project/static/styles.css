@@ -1,125 +1,143 @@
+/* Base layout and typography */
 body {
-    background: #f4f4f4; /* Light grey background */
-    color: #333; /* Dark grey text */
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Modern font */
-    line-height: 1.6; /* Improved readability */
+    background: #fff5f5; /* Very light red background */
+    color: #2c2c2c; /* Dark gray text for readability */
+    font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
     margin: 0;
     padding: 20px;
 }
 
+/* Headings */
 h1, h2 {
-    color: #ff0000; /* Primary blue color */
+    color: #b71c1c; /* Deep red for headings */
     margin-bottom: 20px;
 }
 
+/* Form container styling */
 form {
-    background: white;
+    background: #ffffff;
     padding: 20px;
-    border-radius: 8px; /* Rounded corners */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
     margin-bottom: 20px;
 }
 
-input[type="file"], select {
-    padding: 10px;
-    margin-bottom: 10px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    width: calc(100% - 22px); /* Adjust width to account for padding and border */
+/* Inputs and selects */
+input[type="file"],
+select {
+    padding: 12px;
+    margin-bottom: 15px;
+    border: 1px solid #e0e0e0;
+    border-radius: 6px;
+    width: 100%;
+    font-size: 14px;
+    box-sizing: border-box;
 }
 
+/* Buttons */
 button {
     padding: 12px 20px;
-    background-color: #f87777; /* Primary blue color */
-    color: rgb(171, 138, 138);
+    background-color: #e53935; /* Vibrant red */
+    color: white;
+    font-weight: 500;
     border: none;
-    border-radius: 4px;
+    border-radius: 6px;
     cursor: pointer;
-    transition: background-color 0.3s ease; /* Smooth transition */
+    transition: background-color 0.3s ease;
 }
 
 button:hover {
-    background-color: #f87777; /* Darker blue on hover */
+    background-color: #c62828; /* Slightly darker red on hover */
 }
 
+/* Code block (for Python snippets) */
 pre {
-    background-color: #f9f9f9;
+    background-color: #fff0f0;
     padding: 15px;
-    border: 1px solid #eee;
-    border-radius: 4px;
-    overflow-x: auto; /* Enable horizontal scrolling for long code */
-    white-space: pre-wrap; /* Allows line breaks */
+    border: 1px solid #ffcdd2;
+    border-radius: 6px;
+    overflow-x: auto;
+    white-space: pre-wrap;
+    font-family: 'Courier New', monospace;
 }
 
+/* Logo positioning */
 #logo {
     position: absolute;
     top: 20px;
     right: 20px;
-    width: 150px; /* Reduced logo size */
+    width: 120px;
     height: auto;
 }
 
-/* Table styles */
+/* Tables */
 .table {
     width: 100%;
     border-collapse: collapse;
     margin-bottom: 20px;
+    font-size: 14px;
 }
 
 .table th, .table td {
-    border: 1px solid #ddd;
-    padding: 8px;
+    border: 1px solid #f5bcbc;
+    padding: 10px;
     text-align: left;
 }
 
 .table th {
-    background-color: #f87777;
+    background-color: #e53935;
+    color: white;
 }
 
-/* Responsive adjustments */
+/* Responsive tweaks */
 @media (max-width: 600px) {
     body {
         padding: 10px;
     }
 
     #logo {
-        width: 100px;
+        width: 90px;
         top: 10px;
         right: 10px;
     }
 }
 
-/* ... your existing styles ... */
-
+/* Tab navigation */
 .tab-container {
     display: flex;
     gap: 10px;
     margin-bottom: 20px;
+    flex-wrap: wrap;
 }
 
 .tab-button {
     padding: 10px 15px;
-    border: 1px solid #ddd;
-    border-radius: 5px 5px 0 0;
-    background-color: #f87777;
+    border: 1px solid #f5bcbc;
+    border-radius: 6px 6px 0 0;
+    background-color: #ffebee; /* Light red tab background */
+    color: #b71c1c;
+    font-weight: 500;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    transition: all 0.2s ease;
 }
 
 .tab-button.active {
-    background-color: #f87777;
+    background-color: #e53935;
     color: white;
-    border-bottom: none;
+    border-bottom: 2px solid white;
 }
 
+/* Tab content container */
 .content-section {
     background: white;
     padding: 20px;
-    border-radius: 0 8px 8px 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 0 0 8px 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.03);
     margin-bottom: 20px;
 }
 
+/* Utility */
 .hidden {
     display: none;
 }
