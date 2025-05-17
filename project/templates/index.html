@@ -71,14 +71,17 @@
       let activeCodeId = null;
 
       function setActiveTab(sectionId, codeId) {
+        // Hide all content sections
         const contentSections = document.querySelectorAll(".content-section");
         contentSections.forEach((section) => section.classList.add("hidden"));
 
+        // Show selected content section
         const selectedSection = document.getElementById(sectionId);
         if (selectedSection) {
           selectedSection.classList.remove("hidden");
         }
 
+        // Update active tab button styling
         const tabButtons = document.querySelectorAll(".tab-button");
         tabButtons.forEach((button) => button.classList.remove("active"));
 
@@ -89,7 +92,22 @@
           activeButton.classList.add("active");
         }
 
+        // Update the active code ID
         activeCodeId = codeId;
+
+        // ✅ NEW: If the code snippet panel is visible, update the content immediately
+        const codeSnippetContainer = document.getElementById(
+          "code-snippet-container"
+        );
+        const codeElement = document.getElementById("code-snippet");
+        const selectedCodeElement = document.getElementById(activeCodeId);
+
+        if (
+          codeSnippetContainer.style.display === "block" &&
+          selectedCodeElement
+        ) {
+          codeElement.textContent = selectedCodeElement.textContent.trim();
+        }
       }
 
       function toggleCodeSnippet() {
