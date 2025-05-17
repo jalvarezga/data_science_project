@@ -95,18 +95,12 @@
         // Update the active code ID
         activeCodeId = codeId;
 
-        // ✅ NEW: If the code snippet panel is visible, update the content immediately
+        // ✅ NEW BEHAVIOR: If code snippet is visible, just close it
         const codeSnippetContainer = document.getElementById(
           "code-snippet-container"
         );
-        const codeElement = document.getElementById("code-snippet");
-        const selectedCodeElement = document.getElementById(activeCodeId);
-
-        if (
-          codeSnippetContainer.style.display === "block" &&
-          selectedCodeElement
-        ) {
-          codeElement.textContent = selectedCodeElement.textContent.trim();
+        if (codeSnippetContainer.style.display === "block") {
+          codeSnippetContainer.style.display = "none";
         }
       }
 
