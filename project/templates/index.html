@@ -81,6 +81,7 @@
 
         const tabButtons = document.querySelectorAll(".tab-button");
         tabButtons.forEach((button) => button.classList.remove("active"));
+
         const activeButton = Array.from(tabButtons).find((button) =>
           button.getAttribute("onclick").includes(`'${sectionId}'`)
         );
@@ -110,7 +111,16 @@
       }
 
       window.onload = function () {
-        setActiveTab("upload-section", "upload-code");
+        const defaultTab =
+          "{{ current_tab if current_tab else 'upload-section' }}";
+        const codeMap = {
+          "upload-section": "upload-code",
+          "table-section": "show-table-code",
+          "histogram-section": "histogram-code",
+          "scatter-section": "scatter-code",
+          "summary-section": "summary-code",
+        };
+        setActiveTab(defaultTab, codeMap[defaultTab]);
       };
     </script>
   </body>

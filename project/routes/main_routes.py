@@ -50,7 +50,8 @@ def show_histogram():
                            first_rows=first_rows,#note that we need to return the show first rows of the table here too. otherwise when we plot a histogram the table will not be rendered in the website
                            column_name=column_name,
                            color=color,
-                           no_numeric=no_numeric)
+                           no_numeric=no_numeric,
+                           current_tab='histogram-section')
 
 @main.route('/show_scatter', methods=['POST'])
 def show_scatter():
@@ -74,7 +75,8 @@ def show_scatter():
                                column_names=column_names,
                                first_rows=df.head().to_html(classes='table', index=False),
                                no_numeric=True,
-                               scatter_img=None)
+                               scatter_img=None,
+                               current_tab='scatter-section')
     
     #Continue to plot if there are valid numeric columns
     first_rows = df.head().to_html(classes='table', index=False)
@@ -89,7 +91,8 @@ def show_scatter():
                            x_column=x_column,
                            y_column=y_column,
                            color=color,
-                           no_numeric=False)
+                           no_numeric=False,
+                           current_tab='scatter-section')
 
 @main.route('/show_summary', methods=['POST'])
 def show_summary():
@@ -110,7 +113,8 @@ def show_summary():
                                column_names=[],
                                first_rows=first_rows,
                                no_numeric=True,
-                               summary_data=None)
+                               summary_data=None,
+                               current_tab='summary-section')
 
     summary_data, correlation = compute_summary(df, col1, col2)
 
@@ -123,4 +127,5 @@ def show_summary():
                            correlation=correlation,
                            col1=col1,
                            col2=col2,
-                           no_numeric=False)
+                           no_numeric=False,
+                           current_tab='summary-section')
