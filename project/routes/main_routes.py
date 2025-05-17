@@ -1,5 +1,4 @@
 from flask import Blueprint, render_template, request
-from flask import session, redirect, url_for# for the reset button
 from utils.helpers import allowed_file, read_csv, plot_histogram, plot_scatter, compute_summary
 import os
 from config import UPLOAD_FOLDER, ALLOWED_EXTENSIONS
@@ -130,11 +129,3 @@ def show_summary():
                            col2=col2,
                            no_numeric=False,
                            current_tab='summary-section')
-
-
-
-
-@main.route('/reset', methods=['GET'])
-def reset():
-    session.clear()  # Clears all session data
-    return redirect(url_for('main.index'))
