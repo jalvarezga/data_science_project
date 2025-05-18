@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, request
-from utils.helpers import allowed_file, read_csv, plot_histogram, plot_scatter, compute_summary
+from utils.helpers import allowed_file, read_csv, plot_histogram, plot_scatter, compute_summary, clear_cache
 import os
 from config import UPLOAD_FOLDER, ALLOWED_EXTENSIONS
 
@@ -129,3 +129,9 @@ def show_summary():
                            col2=col2,
                            no_numeric=False,
                            current_tab='summary-section')
+
+
+@main.route('/reset', methods=['POST'])
+def reset():
+    clear_cache()
+    return render_template('index.html', success=False, current_tab='upload-section')
