@@ -44,14 +44,14 @@ def show_summary():
 
     column_names = df.select_dtypes(include=['number']).columns.tolist()
     no_numeric = len(column_names) == 0
-    first_rows = df.head().to_html(classes='table', index=False)
+    #first_rows = df.head().to_html(classes='table', index=False)
 
     if no_numeric:
         return render_template('index.html',
                                success=True,
                                filename=file_path,
                                column_names=[],
-                               first_rows=first_rows,
+                               #first_rows=first_rows,
                                no_numeric=True,
                                summary_data=None,
                                current_tab='summary-section')
@@ -62,7 +62,7 @@ def show_summary():
                            success=True,
                            filename=file_path,
                            column_names=column_names,
-                           first_rows=first_rows,
+                           #first_rows=first_rows,
                            summary_data=summary_data,
                            correlation=correlation,
                            col1=col1,

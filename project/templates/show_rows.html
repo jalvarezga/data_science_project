@@ -1,13 +1,18 @@
 {% if success %}
 <div
   id="table-section"
-  class="content-section {% if histogram_img %}hidden{% endif %}"
+  class="content-section {% if not first_rows %}hidden{% endif %}"
 >
-  <h2>First Rows:</h2>
-  <div class="table-container">{{ first_rows | safe }}</div>
+  <h2>First 5 Rows of the Data</h2>
+  {% if first_rows %} {{ first_rows | safe }} {% else %}
+  <p>No data to display.</p>
+  {% endif %}
 </div>
 
 <pre id="show-table-code" style="display: none">
-print(df.head())
+import pandas as pd
+df = pd.read_csv("{{ filename }}")
+first_rows = df.head()
+print(first_rows)
 </pre>
 {% endif %}
