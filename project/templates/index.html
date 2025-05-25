@@ -27,12 +27,15 @@
       </button>
 
       {% if success %}
-      <button
-        class="tab-button {% if first_rows %}active{% endif %}"
-        onclick="setActiveTab('table-section', 'show-table-code')"
-      >
-        Show First Rows
-      </button>
+      <form method="POST" action="/show_rows" style="display: inline">
+        <input type="hidden" name="file_path" value="{{ filename }}" />
+        <button
+          type="submit"
+          class="tab-button {% if current_tab == 'table-section' %}active{% endif %}"
+        >
+          Show First Rows
+        </button>
+      </form>
 
       {% if not no_numeric %}
       <button
