@@ -25,4 +25,15 @@
   <img src="data:image/png;base64,{{ histogram_img }}" alt="Histogram" />
   {% endif %}
 </div>
+
+<pre id="histogram-code" style="display: none">
+import pandas as pd
+import matplotlib.pyplot as plt
+df = pd.read_csv("{{ filename }}")
+df["{{ column_name if column_name else 'your_column' }}"].dropna().hist(bins=20, color="{{ color if color else 'blue' }}", edgecolor='black')
+plt.title("Histogram of {{ column_name if column_name else 'your_column' }}")
+plt.xlabel("{{ column_name }}")
+plt.ylabel('Frequency')
+plt.show()
+</pre>
 {% endif %}

@@ -8,3 +8,9 @@
     <button type="submit">Upload</button>
   </form>
 </div>
+
+<pre id="upload-code" style="display: none">
+  import pandas as pd
+  df = pd.read_csv('{{ filename if filename else "your_file.csv" }}')
+  </pre
+>

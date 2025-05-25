@@ -8,9 +8,6 @@
       rel="stylesheet"
       href="{{ url_for('static', filename='styles.css') }}"
     />
-    <style>
-      /* Your CSS goes here, or import via styles.css */
-    </style>
   </head>
   <body>
     <img
@@ -36,7 +33,8 @@
       >
         Show First Rows
       </button>
-      {% if success and not no_numeric %}
+
+      {% if not no_numeric %}
       <button
         class="tab-button {% if summary_data %}active{% endif %}"
         onclick="setActiveTab('summary-section', 'summary-code')"
@@ -44,14 +42,14 @@
         Summary
       </button>
       {% endif %}
+
       <button
         class="tab-button {% if histogram_img %}active{% endif %}"
         onclick="setActiveTab('histogram-section', 'histogram-code')"
       >
         Show Histogram
       </button>
-      {% endif %} {% if success and not no_numeric %}
-      <!-- Existing buttons -->
+
       <button
         class="tab-button {% if scatter_img %}active{% endif %}"
         onclick="setActiveTab('scatter-section', 'scatter-code')"
@@ -59,15 +57,34 @@
         Scatter Plot
       </button>
       {% endif %}
+
       <form method="POST" action="/reset" style="display: inline">
         <button type="submit" class="tab-button">Reset App</button>
       </form>
     </div>
 
     <!-- Include Partials -->
-    {% include "upload.html" %} {% include "show_rows.html" %}{% include
-    'summary.html' %} {% include "histogram.html" %}{% include 'scatter.html' %}
-    {% include "code_snippet.html" %}
+    {% include "upload.html" %} {% include "show_rows.html" %} {% include
+    "summary.html" %} {% include "histogram.html" %} {% include "scatter.html"
+    %}
+
+    <!-- Show Code Button + Output Container -->
+    <div style="text-align: center; margin-top: 20px">
+      <button id="toggle-code-button" onclick="toggleCodeSnippet()">
+        Show Python Code Snippet
+      </button>
+    </div>
+
+    <div id="code-snippet-container" style="display: none; margin-top: 10px">
+      <h2>Python Code Snippet:</h2>
+      <pre id="code-snippet">
+{% if success %}
+  Click on a function button above to see the corresponding Python code.
+{% else %}
+  Select and upload a CSV file to see relevant code snippets.
+{% endif %}
+      </pre>
+    </div>
 
     <!-- JavaScript -->
     <script>
@@ -98,7 +115,7 @@
         // Update the active code ID
         activeCodeId = codeId;
 
-        // ✅ NEW BEHAVIOR: If code snippet is visible, just close it
+        // If code snippet container is open, hide it to prevent mismatch
         const codeSnippetContainer = document.getElementById(
           "code-snippet-container"
         );

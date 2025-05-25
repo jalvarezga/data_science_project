@@ -62,4 +62,34 @@
   <p><strong>{{ col1 }} vs {{ col2 }}:</strong> {{ correlation }}</p>
   {% endif %} {% endif %}
 </div>
+
+<pre id="summary-code" style="display: none">
+  import pandas as pd
+  df = pd.read_csv("{{ filename }}")
+  
+  # Summary for {{ col1 }}
+  mean_1 = df["{{ col1 }}"].mean()
+  std_1 = df["{{ col1 }}"].std()
+  min_1 = df["{{ col1 }}"].min()
+  q25_1 = df["{{ col1 }}"].quantile(0.25)
+  q50_1 = df["{{ col1 }}"].median()
+  q75_1 = df["{{ col1 }}"].quantile(0.75)
+  max_1 = df["{{ col1 }}"].max()
+  missing_1 = df["{{ col1 }}"].isnull().sum()
+  
+  # Summary for {{ col2 }}
+  mean_2 = df["{{ col2 }}"].mean()
+  std_2 = df["{{ col2 }}"].std()
+  min_2 = df["{{ col2 }}"].min()
+  q25_2 = df["{{ col2 }}"].quantile(0.25)
+  q50_2 = df["{{ col2 }}"].median()
+  q75_2 = df["{{ col2 }}"].quantile(0.75)
+  max_2 = df["{{ col2 }}"].max()
+  missing_2 = df["{{ col2 }}"].isnull().sum()
+  
+  # Correlation
+  correlation = df["{{ col1 }}"].corr(df["{{ col2 }}"])
+  </pre
+>
+
 {% endif %}

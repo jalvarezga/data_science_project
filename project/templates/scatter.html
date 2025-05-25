@@ -39,4 +39,15 @@
   <img src="data:image/png;base64,{{ scatter_img }}" alt="Scatter Plot" />
   {% endif %} {% endif %}
 </div>
+
+<pre id="scatter-code" style="display: none">
+import pandas as pd
+import matplotlib.pyplot as plt
+df = pd.read_csv("{{ filename }}")
+plt.scatter(df["{{ x_column }}"], df["{{ y_column }}"], color="{{ color }}")
+plt.title("Scatter Plot of {{ x_column }} vs {{ y_column }}")
+plt.xlabel("{{ x_column }}")
+plt.ylabel("{{ y_column }}")
+plt.show()
+</pre>
 {% endif %}
