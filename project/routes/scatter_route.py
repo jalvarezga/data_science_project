@@ -48,7 +48,7 @@ def show_scatter():
                                success=True,
                                filename=file_path,
                                column_names=column_names,
-                               #first_rows=df.head().to_html(classes='table', index=False),
+                               first_rows=df.head().to_html(classes='table', index=False),
                                no_numeric=True,
                                scatter_img=None,
                                current_tab='scatter-section')
@@ -57,14 +57,14 @@ def show_scatter():
 
     
     #Continue to plot if there are valid numeric columns
-    #first_rows = df.head().to_html(classes='table', index=False)
+    first_rows = df.head().to_html(classes='table', index=False)
     scatter_img = plot_scatter(df, x_column, y_column, color)
 
     return render_template('index.html',
                            success=True,
                            filename=file_path,
                            column_names=column_names,
-                           #first_rows=first_rows,
+                           first_rows=first_rows,
                            scatter_img=scatter_img,
                            x_column=x_column,
                            y_column=y_column,

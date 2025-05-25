@@ -41,7 +41,7 @@ def show_histogram():
     no_numeric = len(column_names) == 0
 
     # Recalculate first rows to display the table again
-    #first_rows = df.head().to_html(classes='table', index=False)
+    first_rows = df.head().to_html(classes='table', index=False)
     #note that now the show histogram function needs to re-run the first section that contains the show first rows,
     #  so that when we trigger the show histrogram, the first rows don't get lost.
 
@@ -55,7 +55,7 @@ def show_histogram():
                            filename=file_path,
                            column_names=column_names,
                            histogram_img=img_str,
-                           #first_rows=first_rows,#note that we need to return the show first rows of the table here too. otherwise when we plot a histogram the table will not be rendered in the website
+                           first_rows=first_rows,#note that we need to return the show first rows of the table here too. otherwise when we plot a histogram the table will not be rendered in the website
                            column_name=column_name,
                            color=color,
                            no_numeric=no_numeric,
