@@ -30,7 +30,7 @@ def plot_histogram(df, column_name, color):
 @histogram.route('/show_histogram', methods=['POST'])
 def show_histogram():
     file_path = request.form['file_path']
-    g.file_path = file_path 
+    g.file_path = file_path #g.file_path	Tracks the file being used in the current request
     column_name = request.form['column_name']
     color = request.form['color']
 
