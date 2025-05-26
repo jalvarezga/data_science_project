@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request
+from flask import Blueprint, render_template, request,g
 from utils.helpers import allowed_file, read_csv, clear_cache
 import os
 from config import UPLOAD_FOLDER, ALLOWED_EXTENSIONS
@@ -31,6 +31,7 @@ def plot_scatter(df, x_column, y_column, color):
 @scatter.route('/show_scatter', methods=['POST'])
 def show_scatter():
     file_path = request.form['file_path']
+    g.file_path = file_path
     x_column = request.form['x_column']
     y_column = request.form['y_column']
     color = request.form['color']
@@ -48,7 +49,7 @@ def show_scatter():
                                success=True,
                                filename=file_path,
                                column_names=column_names,
-                               first_rows=df.head().to_html(classes='table', index=False),
+                               #first_rows=df.head().to_html(classes='table', index=False),
                                no_numeric=True,
                                scatter_img=None,
                                current_tab='scatter-section')
@@ -64,7 +65,7 @@ def show_scatter():
                            success=True,
                            filename=file_path,
                            column_names=column_names,
-                           first_rows=first_rows,
+                           #first_rows=first_rows,
                            scatter_img=scatter_img,
                            x_column=x_column,
                            y_column=y_column,

@@ -19,45 +19,50 @@
 
     <!-- Tabs Section -->
     <div class="tab-container">
+      <!-- Always show the Upload tab -->
       <button
-        class="tab-button {% if not success and not histogram_img %}active{% endif %}"
+        class="tab-button {% if not success %}active{% endif %}"
         onclick="setActiveTab('upload-section', 'upload-code')"
       >
         Upload CSV
       </button>
 
       {% if success %}
+      <!-- Show First Rows -->
       <button
-        class="tab-button {% if histogram_img %}active{% endif %}"
+        class="tab-button {% if current_tab == 'table-section' %}active{% endif %}"
         onclick="setActiveTab('table-section', 'show-table-code')"
       >
         Show First Rows
       </button>
 
       {% if not no_numeric %}
+      <!-- Summary Tab -->
       <button
-        class="tab-button {% if summary_data %}active{% endif %}"
+        class="tab-button {% if current_tab == 'summary-section' %}active{% endif %}"
         onclick="setActiveTab('summary-section', 'summary-code')"
       >
         Summary
       </button>
-      {% endif %}
 
+      <!-- Histogram Tab -->
       <button
-        class="tab-button {% if histogram_img %}active{% endif %}"
+        class="tab-button {% if current_tab == 'histogram-section' %}active{% endif %}"
         onclick="setActiveTab('histogram-section', 'histogram-code')"
       >
         Show Histogram
       </button>
 
+      <!-- Scatter Plot Tab -->
       <button
-        class="tab-button {% if scatter_img %}active{% endif %}"
+        class="tab-button {% if current_tab == 'scatter-section' %}active{% endif %}"
         onclick="setActiveTab('scatter-section', 'scatter-code')"
       >
         Scatter Plot
       </button>
-      {% endif %}
+      {% endif %} {% endif %}
 
+      <!-- Reset is always shown -->
       <form method="POST" action="/reset" style="display: inline">
         <button type="submit" class="tab-button">Reset App</button>
       </form>
@@ -148,9 +153,9 @@
         const codeMap = {
           "upload-section": "upload-code",
           "table-section": "show-table-code",
+          "summary-section": "summary-code",
           "histogram-section": "histogram-code",
           "scatter-section": "scatter-code",
-          "summary-section": "summary-code",
         };
         setActiveTab(defaultTab, codeMap[defaultTab]);
       };

@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request
+from flask import Blueprint, render_template, request,g
 from utils.helpers import allowed_file, read_csv, clear_cache
 import os
 from config import UPLOAD_FOLDER, ALLOWED_EXTENSIONS
@@ -37,6 +37,7 @@ def compute_summary(df, col1, col2):
 @summary.route('/show_summary', methods=['POST'])
 def show_summary():
     file_path = request.form['file_path']
+    g.file_path = file_path
     col1 = request.form['col1']
     col2 = request.form['col2']
 
@@ -51,7 +52,7 @@ def show_summary():
                                success=True,
                                filename=file_path,
                                column_names=[],
-                               first_rows=first_rows,
+                               #first_rows=first_rows,
                                no_numeric=True,
                                summary_data=None,
                                current_tab='summary-section')
@@ -62,7 +63,7 @@ def show_summary():
                            success=True,
                            filename=file_path,
                            column_names=column_names,
-                           first_rows=first_rows,
+                           #first_rows=first_rows,
                            summary_data=summary_data,
                            correlation=correlation,
                            col1=col1,
