@@ -3,7 +3,6 @@ from routes.main_routes import main
 from routes.histogram_route import histogram
 from routes.scatter_route import scatter
 from routes.summary_route import summary
-from routes.show_table_route import show_table
 from utils.helpers import read_csv
 from config import UPLOAD_FOLDER
 import os
@@ -17,7 +16,6 @@ app.register_blueprint(main)
 app.register_blueprint(histogram)
 app.register_blueprint(scatter)
 app.register_blueprint(summary)
-app.register_blueprint(show_table)
 
 
 @app.context_processor
