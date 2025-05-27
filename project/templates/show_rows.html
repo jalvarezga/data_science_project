@@ -1,13 +1,19 @@
 {% if success %}
 <div
   id="table-section"
-  class="content-section {% if histogram_img %}hidden{% endif %}"
+  class="content-section {% if current_tab != 'table-section' %}hidden{% endif %}"
 >
   <h2>First Rows:</h2>
+  <form action="/show_rows" method="POST">
+    <input type="hidden" name="file_path" value="{{ filename }}" />
+    <button type="submit">Show First Rows</button>
+  </form>
   <div class="table-container">{{ first_rows | safe }}</div>
 </div>
 
 <pre id="show-table-code" style="display: none">
-print(df.head())
+import pandas as pd
+df = pd.read_csv("{{ filename }}")
+df.head()
 </pre>
 {% endif %}
