@@ -1,7 +1,7 @@
 {% if success %}
 <div
   id="table-section"
-  class="content-section {% if histogram_img %}hidden{% endif %}"
+  class="content-section {% if current_tab != 'table-section' %}hidden{% endif %}"
 >
   <h2>First Rows:</h2>
   <div class="table-container">{{ first_rows | safe }}</div>

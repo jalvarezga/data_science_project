@@ -1,7 +1,7 @@
 {% if success %}
 <div
   id="scatter-section"
-  class="content-section {% if not scatter_img %}hidden{% endif %}"
+  class="content-section {% if current_tab != 'scatter-section' %}hidden{% endif %}"
 >
   {% if no_numeric %}
   <p style="color: red">No numeric columns available for scatter plot.</p>
