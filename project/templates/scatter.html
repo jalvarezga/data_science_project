@@ -37,9 +37,8 @@
   {% if scatter_img %}
   <h2>Scatter Plot:</h2>
   <img src="data:image/png;base64,{{ scatter_img }}" alt="Scatter Plot" />
-  {% endif %} {% endif %}
+  {% endif %}
 </div>
-
 <pre id="scatter-code" style="display: none">
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -50,4 +49,5 @@ plt.xlabel("{{ x_column }}")
 plt.ylabel("{{ y_column }}")
 plt.show()
 </pre>
+{% endif %}
 {% endif %}
