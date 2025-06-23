@@ -25,14 +25,15 @@
       >
         Upload CSV
       </button>
-
-      {% if success %}
       <button
         class="tab-button {% if current_tab == 'table-section' %}active{% endif %}"
         onclick="setActiveTab('table-section', 'show-table-code')"
       >
         Show First Rows
       </button>
+
+      {% if success and not no_numeric %}
+      
 
         <!-- {% if not no_numeric %}-->
       <button
