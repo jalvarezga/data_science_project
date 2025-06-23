@@ -34,14 +34,15 @@
         Show First Rows
       </button>
 
-      {% if not no_numeric %}
+        <!-- {% if not no_numeric %}-->
       <button
         class="tab-button {% if summary_data %}active{% endif %}"
         onclick="setActiveTab('summary-section', 'summary-code')"
       >
         Summary
       </button>
-      {% endif %}
+    
+      <!-- {% endif %}-->
 
       <button
         class="tab-button {% if histogram_img %}active{% endif %}"
