@@ -25,12 +25,15 @@
       >
         Upload CSV
       </button>
+      {% if success %}
+
       <button
         class="tab-button {% if current_tab == 'table-section' %}active{% endif %}"
         onclick="setActiveTab('table-section', 'show-table-code')"
       >
         Show First Rows
       </button>
+      {% endif %}
 
       {% if success and not no_numeric %}
       
@@ -128,23 +131,34 @@
       }
 
       function toggleCodeSnippet() {
-        const codeSnippetContainer = document.getElementById(
-          "code-snippet-container"
-        );
-        const codeElement = document.getElementById("code-snippet");
-        const selectedCodeElement = document.getElementById(activeCodeId);
+    const codeSnippetContainer = document.getElementById("code-snippet-container");
+    const codeElement = document.getElementById("code-snippet");
+    const selectedCodeElement = document.getElementById(activeCodeId);
 
-        codeSnippetContainer.style.display =
-          codeSnippetContainer.style.display === "none" ? "block" : "none";
+    // Toggle visibility first
+    codeSnippetContainer.style.display =
+        codeSnippetContainer.style.display === "none" ? "block" : "none";
 
-        if (
-          codeSnippetContainer.style.display === "block" &&
-          selectedCodeElement
-        ) {
-          codeElement.textContent = selectedCodeElement.textContent.trim();
+    if (codeSnippetContainer.style.display === "block") {
+        // If the container is now visible, try to populate the code
+        if (selectedCodeElement && selectedCodeElement.textContent) {
+            codeElement.textContent = selectedCodeElement.textContent.trim();
+        } else {
+            // Fallback for when no specific code snippet is available or selectedCodeElement is null
+            // This happens when no specific tab has been clicked yet after initial load,
+            // or if the active tab is one that doesn't have a code snippet (e.g., upload without success)
+            if (activeCodeId === "upload-code") {
+                codeElement.textContent = "Select and upload a CSV file to see relevant code snippets.";
+            } else if (activeCodeId === "show-table-code") {
+                 codeElement.textContent = "print(df.head())"; // Explicitly set for show rows
+            }
+             else {
+                // Default message if no specific code is found for the active tab
+                codeElement.textContent = "Click on a function button above to see the corresponding Python code.";
+            }
         }
-      }
-
+    }
+}
       window.onload = function () {
         const defaultTab =
           "{{ current_tab if current_tab else 'upload-section' }}";
