@@ -55,8 +55,8 @@
       
 
         <!-- {% if not no_numeric %}-->
-      <button
-        class="tab-button {% if summary_data %}active{% endif %}"
+        <button
+        class="tab-button {% if current_tab == 'summary-section' %}active{% endif %}"
         onclick="setActiveTab('summary-section', 'summary-code')"
       >
         Summary

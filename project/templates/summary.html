@@ -1,7 +1,7 @@
 {% if success %}
 <div
   id="summary-section"
-  class="content-section {% if not summary_data %}hidden{% endif %}"
+  class="content-section {% if current_tab != 'summary-section' %}hidden{% endif %}"
 >
   {% if no_numeric %}
   <p style="color: red">
