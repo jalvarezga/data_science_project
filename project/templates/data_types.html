@@ -1,0 +1,31 @@
+{% if success %}
+<div
+  id="data-types-section"
+  class="content-section {% if current_tab != 'data-types-section' %}hidden{% endif %}"
+>
+  <h2>Variable Data Types:</h2>
+  {% if data_types_html %} {{ data_types_html | safe }} {% else %}
+  <p>Upload a file to see variable data types.</p>
+  {% endif %}
+</div>
+
+<pre id="data-types-code" style="display: none">
+import pandas as pd
+df = pd.read_csv("{{ filename }}")
+print(df.dtypes)
+# To infer more user-friendly types, you would typically write custom logic
+# based on pandas dtypes, similar to what's done in the Flask route.
+# Example:
+# for col in df.columns:
+#     dtype = df[col].dtype
+#     if pd.api.types.is_numeric_dtype(dtype):
+#         print(f"{col}: Numeric")
+#     elif pd.api.types.is_object_dtype(dtype):
+#         if df[col].nunique() / len(df[col]) < 0.5:
+#             print(f"{col}: Categorical (Text/Mixed)")
+#         else:
+#             print(f"{col}: Text/String")
+#     else:
+#         print(f"{col}: {dtype}")
+</pre>
+{% endif %}

@@ -33,8 +33,24 @@
       >
         Show First Rows
       </button>
-      {% endif %}
+      
 
+      <form
+        method="POST"
+        action="/show_data_types"
+        style="display: inline"
+        id="data-types-form"
+      >
+        <input type="hidden" name="file_path" value="{{ filename }}" />
+        <button
+          type="submit"
+          class="tab-button {% if current_tab == 'data-types-section' %}active{% endif %}"
+          onclick="setActiveTab('data-types-section', 'data-types-code'); event.preventDefault(); document.getElementById('data-types-form').submit();"
+        >
+          View Data Types
+        </button>
+      </form>
+      {% endif %}
       {% if success and not no_numeric %}
       
 
@@ -70,7 +86,7 @@
     </div>
 
     <!-- Include Partials -->
-    {% include "upload.html" %} {% include "show_rows.html" %} {% include
+    {% include "upload.html" %} {% include "show_rows.html" %} {% include "data_types.html" %}{% include
     "summary.html" %} {% include "histogram.html" %} {% include "scatter.html"
     %}
 
@@ -165,6 +181,7 @@
         const codeMap = {
           "upload-section": "upload-code",
           "table-section": "show-table-code",
+          "data-types-section": "data-types-code", // <--- NEW CODE MAP ENTRY
           "histogram-section": "histogram-code",
           "scatter-section": "scatter-code",
           "summary-section": "summary-code",
