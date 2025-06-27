@@ -34,18 +34,9 @@
         Show First Rows
       </button>
       
-
-      <form
-        method="POST"
-        action="/show_data_types"
-        style="display: inline"
-        id="data-types-form"
-      >
-        <input type="hidden" name="file_path" value="{{ filename }}" />
         <button
-          type="submit"
           class="tab-button {% if current_tab == 'data-types-section' %}active{% endif %}"
-          onclick="setActiveTab('data-types-section', 'data-types-code'); event.preventDefault(); document.getElementById('data-types-form').submit();"
+          onclick="setActiveTab('data-types-section', 'data-types-code')"
         >
           View Data Types
         </button>
