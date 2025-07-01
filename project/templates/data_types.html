@@ -1,20 +1,17 @@
-{% if success %}
 <div
   id="data-types-section"
   class="content-section {% if current_tab != 'data-types-section' %}hidden{% endif %}"
 >
   <h2>Variable Data Types:</h2>
-  {% if data_types_html %}
-    {{ data_types_html | safe }}
-  {% else %}
-    <p>No data types available. Please upload a CSV file first.</p>
-  {% endif %}
+  <div id="data-types-content">
+    <!-- Will be replaced by JS -->
+    <p>Click the button to view variable data types.</p>
+  </div>
 </div>
 
 <pre id="data-types-code" style="display: none">
 import pandas as pd
 df = pd.read_csv("{{ filename }}")
 print(df.dtypes)
-# You can also write custom logic to infer friendlier types as shown in the backend.
+# You can also write custom type inference logic as shown in your Flask backend.
 </pre>
-{% endif %}

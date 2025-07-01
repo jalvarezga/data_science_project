@@ -36,7 +36,7 @@
 
     <button
   class="tab-button {% if current_tab == 'data-types-section' %}active{% endif %}"
-  onclick="setActiveTab('data-types-section', 'data-types-code')"
+  onclick="loadDataTypes(); setActiveTab('data-types-section', 'data-types-code')"
 >
   View Data Types
 </button>
@@ -179,7 +179,22 @@
     document.getElementById("table-section").innerHTML = data.html;
   });
 }
-
+function loadDataTypes() {
+  fetch("/get_data_types", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({ file_path: "{{ filename }}" })
+  })
+  .then(response => response.json())
+  .then(data => {
+    document.getElementById("data-types-section").innerHTML = `
+      <h2>Variable Data Types:</h2>
+      ${data.html}
+    `;
+  });
+}
 
 
 window.onload = function () {
