@@ -28,6 +28,7 @@
       {% if success %}
 
       <button
+<<<<<<< HEAD
       class="tab-button {% if current_tab == 'table-section' %}active{% endif %}"
       onclick="loadFirstRows(); setActiveTab('table-section', 'show-table-code')"
     >
@@ -40,7 +41,30 @@
 >
   View Data Types
 </button>
+=======
+        class="tab-button {% if current_tab == 'table-section' %}active{% endif %}"
+        onclick="setActiveTab('table-section', 'show-table-code')"
+      >
+        Show First Rows
+      </button>
+      
+>>>>>>> parent of b59f28a (standardize buttons and some files of data types and show rows)
 
+      <form
+        method="POST"
+        action="/show_data_types"
+        style="display: inline"
+        id="data-types-form"
+      >
+        <input type="hidden" name="file_path" value="{{ filename }}" />
+        <button
+          type="submit"
+          class="tab-button {% if current_tab == 'data-types-section' %}active{% endif %}"
+          onclick="setActiveTab('data-types-section', 'data-types-code'); event.preventDefault(); document.getElementById('data-types-form').submit();"
+        >
+          View Data Types
+        </button>
+      </form>
       {% endif %}
       {% if success and not no_numeric %}
       
@@ -137,7 +161,7 @@
         }
       }
 
-    function toggleCodeSnippet() {
+      function toggleCodeSnippet() {
     const codeSnippetContainer = document.getElementById("code-snippet-container");
     const codeElement = document.getElementById("code-snippet");
     const selectedCodeElement = document.getElementById(activeCodeId);
@@ -166,6 +190,7 @@
         }
     }
 }
+<<<<<<< HEAD
     
 
   function loadFirstRows() {
@@ -183,6 +208,9 @@
 
 
 window.onload = function () {
+=======
+      window.onload = function () {
+>>>>>>> parent of b59f28a (standardize buttons and some files of data types and show rows)
         const defaultTab =
           "{{ current_tab if current_tab else 'upload-section' }}";
         const codeMap = {
@@ -195,8 +223,6 @@ window.onload = function () {
         };
         setActiveTab(defaultTab, codeMap[defaultTab]);
       };
-
-
     </script>
   </body>
 </html>

@@ -4,10 +4,15 @@
   class="content-section {% if current_tab != 'data-types-section' %}hidden{% endif %}"
 >
   <h2>Variable Data Types:</h2>
+<<<<<<< HEAD
   {% if data_types_html %}
     {{ data_types_html | safe }}
   {% else %}
     <p>No data types available. Please upload a CSV file first.</p>
+=======
+  {% if data_types_html %} {{ data_types_html | safe }} {% else %}
+  <p>Upload a file to see variable data types.</p>
+>>>>>>> parent of b59f28a (standardize buttons and some files of data types and show rows)
   {% endif %}
 </div>
 
@@ -15,6 +20,25 @@
 import pandas as pd
 df = pd.read_csv("{{ filename }}")
 print(df.dtypes)
+<<<<<<< HEAD
 # You can also write custom logic to infer friendlier types as shown in the backend.
 </pre>
 {% endif %}
+=======
+# To infer more user-friendly types, you would typically write custom logic
+# based on pandas dtypes, similar to what's done in the Flask route.
+# Example:
+# for col in df.columns:
+#     dtype = df[col].dtype
+#     if pd.api.types.is_numeric_dtype(dtype):
+#         print(f"{col}: Numeric")
+#     elif pd.api.types.is_object_dtype(dtype):
+#         if df[col].nunique() / len(df[col]) < 0.5:
+#             print(f"{col}: Categorical (Text/Mixed)")
+#         else:
+#             print(f"{col}: Text/String")
+#     else:
+#         print(f"{col}: {dtype}")
+</pre>
+{% endif %}
+>>>>>>> parent of b59f28a (standardize buttons and some files of data types and show rows)
