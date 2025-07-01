@@ -28,28 +28,19 @@
       {% if success %}
 
       <button
-        class="tab-button {% if current_tab == 'table-section' %}active{% endif %}"
-        onclick="setActiveTab('table-section', 'show-table-code')"
-      >
-        Show First Rows
-      </button>
-      
+      class="tab-button {% if current_tab == 'table-section' %}active{% endif %}"
+      onclick="loadFirstRows(); setActiveTab('table-section', 'show-table-code')"
+    >
+      Show First Rows
+    </button>
 
-      <form
-        method="POST"
-        action="/show_data_types"
-        style="display: inline"
-        id="data-types-form"
-      >
-        <input type="hidden" name="file_path" value="{{ filename }}" />
-        <button
-          type="submit"
-          class="tab-button {% if current_tab == 'data-types-section' %}active{% endif %}"
-          onclick="setActiveTab('data-types-section', 'data-types-code'); event.preventDefault(); document.getElementById('data-types-form').submit();"
-        >
-          View Data Types
-        </button>
-      </form>
+    <button
+  class="tab-button {% if current_tab == 'data-types-section' %}active{% endif %}"
+  onclick="loadDataTypes(); setActiveTab('data-types-section', 'data-types-code')"
+>
+  View Data Types
+</button>
+
       {% endif %}
       {% if success and not no_numeric %}
       
@@ -146,7 +137,7 @@
         }
       }
 
-      function toggleCodeSnippet() {
+    function toggleCodeSnippet() {
     const codeSnippetContainer = document.getElementById("code-snippet-container");
     const codeElement = document.getElementById("code-snippet");
     const selectedCodeElement = document.getElementById(activeCodeId);
@@ -175,7 +166,38 @@
         }
     }
 }
-      window.onload = function () {
+    
+
+  function loadFirstRows() {
+  fetch("/show_rows", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ file_path: "{{ filename }}" })
+  })
+  .then(response => response.json())
+  .then(data => {
+    document.getElementById("table-section").innerHTML = data.html;
+  });
+}
+function loadDataTypes() {
+  fetch("/get_data_types", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({ file_path: "{{ filename }}" })
+  })
+  .then(response => response.json())
+  .then(data => {
+    document.getElementById("data-types-section").innerHTML = `
+      <h2>Variable Data Types:</h2>
+      ${data.html}
+    `;
+  });
+}
+
+
+window.onload = function () {
         const defaultTab =
           "{{ current_tab if current_tab else 'upload-section' }}";
         const codeMap = {
@@ -188,6 +210,8 @@
         };
         setActiveTab(defaultTab, codeMap[defaultTab]);
       };
+
+
     </script>
   </body>
 </html>
