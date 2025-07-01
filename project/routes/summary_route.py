@@ -17,8 +17,6 @@ summary = Blueprint('summary', __name__)
 @summary.route('/show_summary', methods=['POST'])
 def show_summary():
     file_path = request.form['file_path']
-    col1 = request.form['col1']
-    col2 = request.form['col2']
 
     df = read_csv(os.path.join(UPLOAD_FOLDER, file_path))
 
@@ -56,6 +54,10 @@ def show_summary():
                                no_numeric=True,
                                summary_data=None,
                                current_tab='summary-section')
+    
+    #else we do have numeric variables and it makes sense to compute numeric statistics about them
+    col1 = request.form['col1']
+    col2 = request.form['col2']
 
     summary_data, correlation = compute_summary(df, col1, col2)
 
