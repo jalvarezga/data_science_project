@@ -28,7 +28,7 @@ def show_scatter():
     ##Restrict to numeric columns only
     numeric_columns = df.select_dtypes(include=['number']).columns.tolist()
     all_columns = df.columns.tolist()
-    no_numeric = len(column_names) == 0
+    no_numeric = len(numeric_columns) == 0
      ## If no numeric columns, skip plotting and show message
     if no_numeric:
         return render_template('index.html',

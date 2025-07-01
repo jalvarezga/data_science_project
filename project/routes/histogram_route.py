@@ -59,8 +59,6 @@ def show_histogram():
                            all_column_names=all_columns,
                            histogram_img=img_str,
                            first_rows=first_rows,#note that we need to return the show first rows of the table here too. otherwise when we plot a histogram the table will not be rendered in the website
-                           column_names=numeric_columns,
-                           all_column_names=all_columns,
                            color=color,
                            no_numeric=no_numeric,
                            current_tab='histogram-section')
