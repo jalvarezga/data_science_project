@@ -20,8 +20,9 @@ def show_summary():
 
     df = read_csv(os.path.join(UPLOAD_FOLDER, file_path))
 
-    column_names = df.select_dtypes(include=['number']).columns.tolist()
-    no_numeric = len(column_names) == 0
+    numeric_columns = df.select_dtypes(include=['number']).columns.tolist()
+    all_columns = df.columns.tolist()
+    no_numeric = len(numeric_columns) == 0
     first_rows = df.head().to_html(classes='table', index=False)
 
 
@@ -49,7 +50,8 @@ def show_summary():
         return render_template('index.html',
                                success=True,
                                filename=file_path,
-                               column_names=[],
+                               column_names=numeric_columns,
+                               all_column_names=all_columns,
                                first_rows=first_rows,
                                no_numeric=True,
                                summary_data=None,
@@ -64,7 +66,8 @@ def show_summary():
     return render_template('index.html',
                            success=True,
                            filename=file_path,
-                           column_names=column_names,
+                           column_names=numeric_columns,
+                           all_column_names=all_columns,
                            first_rows=first_rows,
                            summary_data=summary_data,
                            correlation=correlation,

@@ -26,14 +26,16 @@ def show_scatter():
 
 
     ##Restrict to numeric columns only
-    column_names = df.select_dtypes(include=['number']).columns.tolist()
+    numeric_columns = df.select_dtypes(include=['number']).columns.tolist()
+    all_columns = df.columns.tolist()
     no_numeric = len(column_names) == 0
      ## If no numeric columns, skip plotting and show message
     if no_numeric:
         return render_template('index.html',
                                success=True,
                                filename=file_path,
-                               column_names=column_names,
+                               column_names=numeric_columns,
+                               all_column_names=all_columns,
                                first_rows=df.head().to_html(classes='table', index=False),
                                no_numeric=True,
                                scatter_img=None,
@@ -61,7 +63,8 @@ def show_scatter():
     return render_template('index.html',
                            success=True,
                            filename=file_path,
-                           column_names=column_names,
+                           column_names=numeric_columns,
+                           all_column_names=all_columns,
                            first_rows=first_rows,
                            scatter_img=scatter_img,
                            x_column=x_column,

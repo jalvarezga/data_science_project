@@ -40,15 +40,16 @@ def show_data_types():
     data_types_df = pd.DataFrame(data_types_info)
     data_types_html = data_types_df.to_html(classes='table table-striped', index=False)
 
-
+    all_columns = df.columns.tolist()
+    numeric_columns = df.select_dtypes(include=['number']).columns.tolist()
     # You'll likely need the filename and first_rows to maintain context in the main index.html
     first_rows = df.head().to_html(classes='table', index=False)
-    column_names = df.columns.tolist() # All column names for other tabs
 
     return render_template('index.html',
                            success=True,
                            filename=file_path,
                            first_rows=first_rows,
-                           column_names=column_names,
+                           column_names=numeric_columns,          # For summary/histogram/etc.
+                           all_column_names=all_columns,          # For View Data Types display
                            data_types_html=data_types_html,
                            current_tab='data-types-section')
